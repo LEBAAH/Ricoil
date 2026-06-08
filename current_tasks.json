@@ -1,0 +1,22 @@
+[
+  {
+    "id": "409fe297-3113-482f-b4c8-2c2a1fc12684",
+    "title": "Build and host RICOIL website",
+    "status": "done"
+  },
+  {
+    "id": "dc89e74d-351c-4b7c-9416-e592f244f294",
+    "title": "Brand integration & site deployment",
+    "status": "done"
+  },
+  {
+    "id": "80a1470d-d5e1-4b85-97b1-a0c538403808",
+    "title": "Deploy RICOIL website to GitHub Pages",
+    "status": "done"
+  },
+  {
+    "id": "6275232f-8a50-4b81-8c97-9947002f49c4",
+    "title": "Deploy RICOIL website to new repository",
+    "status": "done"
+  }
+]
