@@ -1,0 +1,183 @@
+:root {
+    --primary-green: #1B5E20;
+    --primary-amber: #FFB300;
+    --text-dark: #263238;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.ad-container {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    aspect-ratio: 16 / 9;
+    background-color: var(--primary-green);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    overflow: hidden;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('hero.png') no-repeat center center/cover;
+    opacity: 0.25;
+    z-index: 1;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.8) 100%);
+    z-index: 2;
+}
+
+.ad-header, .ad-content, .ad-footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+}
+
+.logo {
+    height: 180px;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+}
+
+.animate-drop {
+    animation: dropIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes dropIn {
+    0% { transform: translateY(-250px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.ad-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-group {
+    background: rgba(0,0,0,0.3);
+    padding: 20px 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.headline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.8rem;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 5px;
+    line-height: 1.1;
+}
+
+.sub-headline {
+    font-size: 1.6rem;
+    color: var(--primary-amber);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.8s forwards;
+}
+
+.animate-fade-in-delayed {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 1.4s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.ad-footer {
+    padding-bottom: 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-amber);
+    color: var(--text-dark);
+    padding: 20px 50px;
+    font-size: 2rem;
+    font-weight: 900;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out 2.2s forwards, pulse 2s infinite 3s;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    background-color: var(--white);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+.oil-drop {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: var(--primary-amber);
+    border-radius: 0 50% 50% 50%;
+    transform: rotate(45deg);
+    z-index: 5;
+    opacity: 0.4;
+}
+
+.drop-1 { top: 25%; left: 10%; animation: float 5s infinite ease-in-out; }
+.drop-2 { bottom: 35%; right: 10%; animation: float 7s infinite ease-in-out 1s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(45deg); }
+    50% { transform: translateY(-30px) rotate(45deg); }
+}
+
+@media (max-width: 1024px) {
+    .headline { font-size: 2.2rem; }
+    .sub-headline { font-size: 1.1rem; }
+    .cta-button { font-size: 1.4rem; padding: 15px 35px; }
+    .logo { height: 120px; }
+}
