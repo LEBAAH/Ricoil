@@ -14,14 +14,36 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add timestamp
             data.timestamp = new Date().toISOString();
 
-            // Store locally (demonstration)
+            // Store locally (backup)
             saveSubmission(data);
 
-            // Show success message
-            contactForm.classList.add('hidden');
-            formSuccess.classList.remove('hidden');
+            // Send to Formspree
+            fetch("https://formspree.io/f/ricoil.ltd@gmail.com", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Show success message
+                    contactForm.classList.add('hidden');
+                    formSuccess.classList.remove('hidden');
+                    contactForm.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            alert("Oops! There was a problem submitting your form. Please try again or contact us via phone.");
+                        }
+                    })
+                }
+            }).catch(error => {
+                alert("Oops! There was a problem submitting your form. Please check your connection and try again.");
+            });
 
-            console.log('Form submitted successfully:', data);
+            console.log('Form submission initiated:', data);
         });
     }
 
