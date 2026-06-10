@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RICOIL YouTube Ad Creative</title>
+    <style>
+        :root {
+            --primary-green: #1B5E20;
+            --primary-amber: #FFB300;
+            --text-dark: #263238;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 16:9 Aspect Ratio Container */
+        .ad-viewport {
+            position: relative;
+            width: 100vw;
+            height: 56.25vw; /* 16:9 ratio */
+            max-width: 1920px;
+            max-height: 1080px;
+            background-color: var(--white);
+            overflow: hidden;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+        }
+
+        /* Persistent Brand Header */
+        .brand-header {
+            position: absolute;
+            top: 5%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .brand-header h1 {
+            color: var(--primary-green);
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin: 0;
+            text-shadow: 0 4px 15px rgba(255,255,255,0.8);
+        }
+
+        /* Scene Management */
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 1s;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .scene.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Background Overlays for readability */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            z-index: 1;
+        }
+
+        .content-box {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+            padding-top: 150px;
+        }
+
+        /* Scene 1 Styles */
+        #scene-1 { background-image: url('ad-frame-1.png'); }
+        
+        .tagline {
+            font-size: 3rem;
+            color: var(--white);
+            font-weight: 800;
+            text-align: center;
+            background: var(--primary-green);
+            display: inline-block;
+            padding: 15px 50px;
+            border-radius: 60px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: slideInUp 1s ease-out forwards;
+        }
+
+        /* Scene 2 Styles */
+        #scene-2 { background-image: url('ad-frame-2.png'); }
+        
+        .service-text {
+            font-size: 4rem;
+            color: var(--primary-green);
+            font-weight: 900;
+            text-shadow: 2px 2px 0 var(--primary-amber);
+            background: rgba(255,255,255,0.8);
+            padding: 30px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .icon-row {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 6rem;
+        }
+
+        /* Scene 3 Styles */
+        #scene-3 { background-image: url('ad-frame-3.png'); }
+        
+        .audience-text {
+            font-size: 4.5rem;
+            color: var(--white);
+            font-weight: 900;
+            background: var(--primary-green);
+            padding: 40px 80px;
+            transform: skew(-5deg);
+            box-shadow: 15px 15px 0 var(--primary-amber);
+        }
+
+        /* Scene 4 Styles */
+        #scene-4 { background-image: url('ad-frame-4.png'); }
+        
+        .cta-card {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            border: 8px solid var(--primary-green);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-headline {
+            font-size: 4.5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .contact-links {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .contact-links a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .final-url {
+            font-size: 3rem;
+            color: var(--primary-green);
+            background: var(--primary-amber);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .final-url:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse { animation: pulse 2s infinite; }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 15px;
+            background: var(--primary-amber);
+            width: 0%;
+            z-index: 200;
+        }
+
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        .progress-active {
+            animation: progress 5s linear forwards;
+        }
+
+        /* Control Overlay (Hidden during recording) */
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 300;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .controls:hover { opacity: 1; }
+        .btn-play {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-viewport">
+        <!-- Persistent Brand Name -->
+        <header class="brand-header">
+            <h1>RICOIL</h1>
+        </header>
+
+        <div class="progress-bar" id="progress"></div>
+
+        <!-- Scene 1: Intro -->
+        <div class="scene active" id="scene-1">
+            <div class="overlay"></div>
+            <div class="content-box">
+                <div class="tagline">Hassle-Free Waste Oil Collection</div>
+            </div>
+        </div>
+
+        <!-- Scene 2: Solution -->
+        <div class="scene" id="scene-2">
+            <div class="overlay"></div>
+            <div class="content-box">
+                <div class="icon-row">
+                    <span>🚚</span>
+                    <span>♻️</span>
+                    <span>🛢️</span>
+                </div>
+                <div class="service-text">We Collect & Recycle<br>Used Cooking Oil</div>
+            </div>
+        </div>
+
+        <!-- Scene 3: Audience -->
+        <div class="scene" id="scene-3">
+            <div class="overlay" style="background: rgba(0,0,0,0.2)"></div>
+            <div class="content-box">
+                <div class="audience-text">Serving UK Restaurants,<br>Pubs & Cafés</div>
+            </div>
+        </div>
+
+        <!-- Scene 4: CTA -->
+        <div class="scene" id="scene-4">
+            <div class="overlay"></div>
+            <div class="content-box">
+                <div class="cta-card">
+                    <h2 class="cta-headline pulse">Get Your Free Quote Today</h2>
+                    <div class="contact-links">
+                        <p>📞 <a href="tel:08448125818">08448125818</a></p>
+                        <p>✉️ <a href="mailto:ricoil.ltd@gmail.com">ricoil.ltd@gmail.com</a></p>
+                    </div>
+                    <a href="https://lebaah.github.io/Ricoil/" class="final-url">Visit ricoil.co.uk</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn-play" onclick="startAd()">Start Sequence</button>
+        </div>
+    </div>
+
+    <script>
+        const scenes = document.querySelectorAll('.scene');
+        const progress = document.getElementById('progress');
+        let currentScene = 0;
+        let interval;
+
+        function nextScene() {
+            // Remove active from current
+            scenes[currentScene].classList.remove('active');
+            
+            // Advance index
+            currentScene = (currentScene + 1) % scenes.length;
+            
+            // Add active to next
+            scenes[currentScene].classList.add('active');
+
+            // Reset and restart progress bar
+            progress.classList.remove('progress-active');
+            void progress.offsetWidth; // Trigger reflow
+            progress.classList.add('progress-active');
+        }
+
+        function startAd() {
+            // Reset to first scene
+            scenes.forEach(s => s.classList.remove('active'));
+            currentScene = 0;
+            scenes[0].classList.add('active');
+
+            // Start progress
+            progress.classList.remove('progress-active');
+            void progress.offsetWidth;
+            progress.classList.add('progress-active');
+
+            // Set interval
+            if (interval) clearInterval(interval);
+            interval = setInterval(nextScene, 5000);
+
+            // Hide controls after a delay for recording
+            setTimeout(() => {
+                document.querySelector('.controls').style.opacity = '0';
+            }, 1000);
+        }
+
+        // Initialize progress bar for scene 1
+        progress.classList.add('progress-active');
+        interval = setInterval(nextScene, 5000);
+    </script>
+</body>
+</html>
