@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lebaah.github.io/Ricoil/sitemap.xml
