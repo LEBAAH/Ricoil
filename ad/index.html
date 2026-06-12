@@ -10,27 +10,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="ad-container">
-        <div class="background-image"></div>
-        <div class="background-overlay"></div>
-        
-        <header class="ad-header">
-            <img src="logo.png" alt="RICOIL Logo" class="logo animate-drop">
-        </header>
+    <div class="ad-viewport">
+        <div class="progress-bar" id="progress"></div>
 
-        <main class="ad-content">
-            <div class="text-group">
-                <h1 class="headline animate-fade-in">Turn Waste Oil Into Sustainable Biofuel</h1>
-                <p class="sub-headline animate-fade-in-delayed">Reliable UK-Wide Collection Service</p>
+        <!-- Scene 1: Intro -->
+        <div class="scene active" id="scene-1">
+            <div class="overlay"></div>
+            <div class="content-box">
+                <div class="tagline animate-fade-in">Hassle-Free Waste Oil Collection</div>
             </div>
-        </main>
+        </div>
 
-        <footer class="ad-footer">
-            <a href="https://lebaah.github.io/Ricoil/contact.html" class="cta-button animate-pulse">GET A FREE QUOTE</a>
-        </footer>
-        
-        <div class="oil-drop drop-1"></div>
-        <div class="oil-drop drop-2"></div>
+        <!-- Scene 2: Solution -->
+        <div class="scene" id="scene-2">
+            <div class="overlay"></div>
+            <div class="content-box">
+                <div class="icon-row">
+                    <span>🚚</span>
+                    <span>♻️</span>
+                    <span>🛢️</span>
+                </div>
+                <div class="service-text animate-fade-in">We Collect & Recycle<br>Used Cooking Oil</div>
+            </div>
+        </div>
+
+        <!-- Scene 3: Audience -->
+        <div class="scene" id="scene-3">
+            <div class="overlay" style="background: rgba(0,0,0,0.2)"></div>
+            <div class="content-box">
+                <div class="audience-text animate-fade-in">Serving UK Restaurants,<br>Pubs & Cafés</div>
+            </div>
+        </div>
+
+        <!-- Scene 4: CTA -->
+        <div class="scene" id="scene-4">
+            <div class="overlay"></div>
+            <div class="content-box">
+                <div class="cta-card animate-fade-in">
+                    <h2 class="cta-headline">Get Your Free Quote Today</h2>
+                    <div class="contact-links">
+                        <p><strong>Phone:</strong> 08448125818</p>
+                        <p><strong>Email:</strong> ricoil.ltd@gmail.com</p>
+                    </div>
+                    <a href="https://lebaah.github.io/Ricoil/contact.html" target="_blank" class="cta-button pulse">GET A FREE QUOTE</a>
+                    <div class="final-url">www.ricoil.co.uk</div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        const scenes = document.querySelectorAll('.scene');
+        const progress = document.getElementById('progress');
+        let currentScene = 0;
+
+        function nextScene() {
+            scenes[currentScene].classList.remove('active');
+            currentScene = (currentScene + 1) % scenes.length;
+            scenes[currentScene].classList.add('active');
+
+            progress.classList.remove('progress-active');
+            void progress.offsetWidth; 
+            progress.classList.add('progress-active');
+        }
+
+        progress.classList.add('progress-active');
+        setInterval(nextScene, 5000);
+    </script>
 </body>
 </html>
