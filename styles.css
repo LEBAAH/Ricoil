@@ -108,28 +108,33 @@ nav {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(27, 94, 32, 0.7), rgba(27, 94, 32, 0.6)), url('hero-banner.png') no-repeat center center/cover;
-    padding: 120px 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-banner.png') no-repeat center center/cover;
+    padding: 160px 0;
     text-align: center;
     color: var(--white);
 }
 
 .hero-content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+    font-size: 56px;
+    margin-bottom: 25px;
     color: var(--white);
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    line-height: 1.2;
 }
 
 .hero-content p {
-    font-size: 20px;
-    margin-bottom: 30px;
-    max-width: 700px;
+    font-size: 22px;
+    margin-bottom: 40px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    font-weight: 400;
 }
 
 .hero-btns .btn {
     margin: 0 10px;
+    padding: 15px 35px;
+    font-size: 18px;
 }
 
 /* Value Prop / Grid */
@@ -472,4 +477,80 @@ footer {
     .stats-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Major Overhaul Additions */
+.section-padding {
+    padding: 80px 0;
+}
+
+.bg-light {
+    background-color: var(--light-bg);
+}
+
+/* How It Works */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.step {
+    text-align: center;
+    position: relative;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 auto 20px;
+}
+
+.step h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+/* FAQ */
+.faq-container {
+    max-width: 800px;
+    margin: 40px auto 0;
+}
+
+.faq-item {
+    margin-bottom: 30px;
+    background: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.faq-item h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+/* Content Text (Privacy/Terms) */
+.content-text {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-text h2 {
+    margin: 40px 0 15px;
+    color: var(--primary-color);
+}
+
+.content-text p {
+    margin-bottom: 20px;
 }
