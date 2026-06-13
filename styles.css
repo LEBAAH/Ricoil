@@ -576,3 +576,21 @@ footer {
         transform: translateY(0);
     }
 }
+
+.btn-cta {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.btn-cta:hover {
+    background-color: #e68a00;
+    transform: translateY(-2px);
+}
+
+.btn-text {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
