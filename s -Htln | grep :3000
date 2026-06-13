@@ -1,0 +1,178 @@
+[33mcommit 3632a647e2779f1b4fcebe8cc436347ad6613e82[m
+Author: LEBAAH <LEBAAH@users.noreply.github.com>
+Date:   Wed Jun 10 09:42:11 2026 +0000
+
+    Switch to Formsubmit.co for contact form and add thank-you page
+
+[1mdiff --git a/main.js b/main.js[m
+[1mindex 0ba69bc..2af6191 100644[m
+[1m--- a/main.js[m
+[1m+++ b/main.js[m
+[36m@@ -1,12 +1,8 @@[m
+ document.addEventListener('DOMContentLoaded', () => {[m
+     const contactForm = document.getElementById('oil-enquiry-form');[m
+[31m-    const formSuccess = document.getElementById('form-success');[m
+[31m-    const resetBtn = document.getElementById('reset-form');[m
+ [m
+     if (contactForm) {[m
+[31m-        contactForm.addEventListener('submit', (e) => {[m
+[31m-            e.preventDefault();[m
+[31m-[m
+[32m+[m[32m        contactForm.addEventListener('submit', () => {[m
+             // Get form data[m
+             const formData = new FormData(contactForm);[m
+             const data = Object.fromEntries(formData.entries());[m
+[36m@@ -17,41 +13,8 @@[m [mdocument.addEventListener('DOMContentLoaded', () => {[m
+             // Store locally (backup)[m
+             saveSubmission(data);[m
+ [m
+[31m-            // Send to Formspree[m
+[31m-            fetch("https://formspree.io/f/ricoil.ltd@gmail.com", {[m
+[31m-                method: "POST",[m
+[31m-                body: formData,[m
+[31m-                headers: {[m
+[31m-                    'Accept': 'application/json'[m
+[31m-                }[m
+[31m-            }).then(response => {[m
+[31m-                if (response.ok) {[m
+[31m-                    // Show success message[m
+[31m-                    contactForm.classList.add('hidden');[m
+[31m-                    formSuccess.classList.remove('hidden');[m
+[31m-                    contactForm.reset();[m
+[31m-                } else {[m
+[31m-                    response.json().then(data => {[m
+[31m-                        if (Object.hasOwn(data, 'errors')) {[m
+[31m-                            alert(data["errors"].map(error => error["message"]).join(", "));[m
+[31m-                        } else {[m
+[31m-                            alert("Oops! There was a problem submitting your form. Please try again or contact us via phone.");[m
+[31m-                        }[m
+[31m-                    })[m
+[31m-                }[m
+[31m-            }).catch(error => {[m
+[31m-                alert("Oops! There was a problem submitting your form. Please check your connection and try again.");[m
+[31m-            });[m
+[31m-[m
+             console.log('Form submission initiated:', data);[m
+[31m-        });[m
+[31m-    }[m
+[31m-[m
+[31m-    if (resetBtn) {[m
+[31m-        resetBtn.addEventListener('click', () => {[m
+[31m-            contactForm.reset();[m
+[31m-            contactForm.classList.remove('hidden');[m
+[31m-            formSuccess.classList.add('hidden');[m
+[32m+[m[32m            // No preventDefault() here, so it will submit to the form action[m
+         });[m
+     }[m
+ });[m
+
+[33mcommit 66cfe9e7f9fd33918d8a971a7eac009e1c2fdba9[m
+Author: LEBAAH <LEBAAH@users.noreply.github.com>
+Date:   Wed Jun 10 09:41:37 2026 +0000
+
+    Integrate Formspree for email submissions to ricoil.ltd@gmail.com
+
+[1mdiff --git a/main.js b/main.js[m
+[1mindex 858be7a..0ba69bc 100644[m
+[1m--- a/main.js[m
+[1m+++ b/main.js[m
+[36m@@ -14,14 +14,36 @@[m [mdocument.addEventListener('DOMContentLoaded', () => {[m
+             // Add timestamp[m
+             data.timestamp = new Date().toISOString();[m
+ [m
+[31m-            // Store locally (demonstration)[m
+[32m+[m[32m            // Store locally (backup)[m
+             saveSubmission(data);[m
+ [m
+[31m-            // Show success message[m
+[31m-            contactForm.classList.add('hidden');[m
+[31m-            formSuccess.classList.remove('hidden');[m
+[32m+[m[32m            // Send to Formspree[m
+[32m+[m[32m            fetch("https://formspree.io/f/ricoil.ltd@gmail.com", {[m
+[32m+[m[32m                method: "POST",[m
+[32m+[m[32m                body: formData,[m
+[32m+[m[32m                headers: {[m
+[32m+[m[32m                    'Accept': 'application/json'[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }).then(response => {[m
+[32m+[m[32m                if (response.ok) {[m
+[32m+[m[32m                    // Show success message[m
+[32m+[m[32m                    contactForm.classList.add('hidden');[m
+[32m+[m[32m                    formSuccess.classList.remove('hidden');[m
+[32m+[m[32m                    contactForm.reset();[m
+[32m+[m[32m                } else {[m
+[32m+[m[32m                    response.json().then(data => {[m
+[32m+[m[32m                        if (Object.hasOwn(data, 'errors')) {[m
+[32m+[m[32m                            alert(data["errors"].map(error => error["message"]).join(", "));[m
+[32m+[m[32m                        } else {[m
+[32m+[m[32m                            alert("Oops! There was a problem submitting your form. Please try again or contact us via phone.");[m
+[32m+[m[32m                        }[m
+[32m+[m[32m                    })[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }).catch(error => {[m
+[32m+[m[32m                alert("Oops! There was a problem submitting your form. Please check your connection and try again.");[m
+[32m+[m[32m            });[m
+ [m
+[31m-            console.log('Form submitted successfully:', data);[m
+[32m+[m[32m            console.log('Form submission initiated:', data);[m
+         });[m
+     }[m
+ [m
+
+[33mcommit 66bd64aca86bbcd0c0ad434da4f575a845a54de4[m
+Author: LEBAAH <LEBAAH@users.noreply.github.com>
+Date:   Mon Jun 8 03:17:13 2026 +0000
+
+    Deploy RICOIL website
+
+[1mdiff --git a/main.js b/main.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..858be7a[m
+[1m--- /dev/null[m
+[1m+++ b/main.js[m
+[36m@@ -0,0 +1,45 @@[m
+[32m+[m[32mdocument.addEventListener('DOMContentLoaded', () => {[m
+[32m+[m[32m    const contactForm = document.getElementById('oil-enquiry-form');[m
+[32m+[m[32m    const formSuccess = document.getElementById('form-success');[m
+[32m+[m[32m    const resetBtn = document.getElementById('reset-form');[m
+[32m+[m
+[32m+[m[32m    if (contactForm) {[m
+[32m+[m[32m        contactForm.addEventListener('submit', (e) => {[m
+[32m+[m[32m            e.preventDefault();[m
+[32m+[m
+[32m+[m[32m            // Get form data[m
+[32m+[m[32m            const formData = new FormData(contactForm);[m
+[32m+[m[32m            const data = Object.fromEntries(formData.entries());[m
+[32m+[m[41m            [m
+[32m+[m[32m            // Add timestamp[m
+[32m+[m[32m            data.timestamp = new Date().toISOString();[m
+[32m+[m
+[32m+[m[32m            // Store locally (demonstration)[m
+[32m+[m[32m            saveSubmission(data);[m
+[32m+[m
+[32m+[m[32m            // Show success message[m
+[32m+[m[32m            contactForm.classList.add('hidden');[m
+[32m+[m[32m            formSuccess.classList.remove('hidden');[m
+[32m+[m
+[32m+[m[32m            console.log('Form submitted successfully:', data);[m
+[32m+[m[32m        });[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    if (resetBtn) {[m
+[32m+[m[32m        resetBtn.addEventListener('click', () => {[m
+[32m+[m[32m            contactForm.reset();[m
+[32m+[m[32m            contactForm.classList.remove('hidden');[m
+[32m+[m[32m            formSuccess.classList.add('hidden');[m
+[32m+[m[32m        });[m
+[32m+[m[32m    }[m
+[32m+[m[32m});[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m * Saves the form submission to localStorage[m
+[32m+[m[32m * @param {Object} data[m[41m [m
+[32m+[m[32m */[m
+[32m+[m[32mfunction saveSubmission(data) {[m
+[32m+[m[32m    let submissions = JSON.parse(localStorage.getItem('ricoil_enquiries') || '[]');[m
+[32m+[m[32m    submissions.push(data);[m
+[32m+[m[32m    localStorage.setItem('ricoil_enquiries', JSON.stringify(submissions));[m
+[32m+[m[32m}[m
